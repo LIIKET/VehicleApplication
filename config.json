@@ -1,6 +1,6 @@
 {
   "PortName": "COM3",
-  "HostName": "SogetiIoTHub.azure-devices.net",
-  "DeviceId": "myFirstDevice",
-  "AccessKey": "TjcTmHKnsUC0Px1oypcSN3rMP9Mzli0msxU9L3Eo3fM"
+  "HostName": "sogetiiothubfree.azure-devices.net",
+  "DeviceId": "mySecondDevice",
+  "AccessKey": "KPRZ53OifswmWBvQQVnBPhn3/hOs+2u+F47wctNQhtY="
 }
