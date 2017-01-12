@@ -1,0 +1,5 @@
+--replay "{filename}"
+--noazure
+--notemp
+--nogps
+--nolight
