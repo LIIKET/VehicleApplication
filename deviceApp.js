@@ -26,6 +26,12 @@ if(!argv.noazure){
 if(!argv.nogps)
 {
     var GPS = require('./gpsReceiver.js');
+
+    if(argv.record != null){
+        GPS.EnableRecording(argv.record);
+        console.log("Recording to: " + argv.record);
+    }
+
     if(argv.replay == null){
 
         GPS.StartReceiving(config.PortName);
@@ -37,7 +43,7 @@ if(!argv.nogps)
     GPS.eventEmitter.on('received', function(data)
     {
         var jsonToAzure = {messageType: "position", deviceId: config.DeviceId,telemetry: data};  
-        console.log(jsonToAzure);
+        //console.log(jsonToAzure);
 
         if(!argv.noazure){
             Azure.sendToCloud(jsonToAzure);  

@@ -3,6 +3,12 @@ var SerialPort = serialport;
 var fs = require('fs');
 var events = require('events');
 
+var recordFile = null;
+function enableRecording(file){
+  recordFile = file;
+}
+exports.EnableRecording = enableRecording;
+
 var eventEmitter = new events.EventEmitter();
 exports.eventEmitter = eventEmitter;
 
@@ -51,7 +57,7 @@ function handleSerialData(data) {
     var pos = createPositionObject(data);
   
     //record route?
-    if(process.argv[2] == "record"){
+    if(recordFile != null){
         addPositionToReplay(data);
     }
 
@@ -62,16 +68,16 @@ function handleSerialData(data) {
 
 
 function addPositionToReplay(data){
-      fs.readFile(process.argv[3], 'utf8', function readFileCallback(err, filedata){
+      fs.readFile(recordFile, 'utf8', function readFileCallback(err, filedata){
       if (err){
-          console.log(err);
+          console.log("File didn't exist. Creating a new file with name: " + recordFile);
           //Create new file if not exists
           filedata = '{"table":[]}';
       } 
       obj = JSON.parse(filedata); //now it an object
       obj.table.push(data); //add some data
       json = JSON.stringify(obj); //convert it back to json
-      fs.writeFile(process.argv[3], json, 'utf8', function(){}); // write it back 
+      fs.writeFile(recordFile, json, 'utf8', function(){}); // write it back 
       });
 }
 
