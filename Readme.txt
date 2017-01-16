@@ -1,6 +1,7 @@
 FLAGS:
 
---replay "{filename}" //
+--replay "{filename}"
+--record "{filename}"
 --noazure
 --notemp
 --nogps
