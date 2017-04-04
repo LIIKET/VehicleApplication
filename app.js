@@ -5,21 +5,14 @@ var argv = require('minimist')(process.argv.slice(2));
 var config = require('./config.json');
 
 //Initialize lightSwitch if allowed
-if(!argv.nolight){
-    var lightSwitch = require('./lightSwitch.js');
-}
+
 
 //Initialize Azure client if allowed
 if(!argv.noazure){
     var Azure = require('./azureSender.js');
     Azure.Connect(config.HostName, config.DeviceId, config.AccessKey);
 
-    Azure.eventEmitter.on('lightSwitch', function(){
-        //Call lightswitch if active
-        if(!argv.nolight){
-            lightSwitch.lightSwitch();
-        }
-    });
+
 }
 
 //Initialize GPS if allowed
@@ -72,7 +65,7 @@ if(!argv.noobd)
     var obdReader = require('./fakeObdReader');
     obdReader.eventEmitter.on('received', function(data)
     {
-        var jsonToAzure = {messageType: "obd", deviceId: config.DeviceId, telemetry: data};
+        var jsonToAzure = {messageType: "obd", dateTime: Date.now(),deviceId: config.DeviceId, telemetry: data};
         console.log(jsonToAzure);
 
         if(!argv.noazure){

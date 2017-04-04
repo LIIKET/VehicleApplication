@@ -6,6 +6,7 @@ FLAGS:
 --notemp
 --nogps
 --nolight
+--noobd
 
 CONFIGURE:
 Uses file config.json in same directory as application. Format like so:
