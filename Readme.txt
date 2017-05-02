@@ -5,7 +5,6 @@ FLAGS:
 --noazure
 --notemp
 --nogps
---nolight
 --noobd
 
 CONFIGURE:
