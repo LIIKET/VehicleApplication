@@ -62,7 +62,7 @@ if(!argv.notemp)
 //Initialize fake obd2 reader if allowed
 if(!argv.noobd)
 {
-    var obdReader = require('./fakeObdReader');
+    var obdReader = require('./fakeObdReader.js');
     obdReader.eventEmitter.on('received', function(data)
     {
         var jsonToAzure = {messageType: "obd", dateTime: Date.now(),deviceId: config.DeviceId, telemetry: data};
